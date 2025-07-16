@@ -44,40 +44,40 @@ class EmailRepository  implements EmailRepositoryInterface
             $mail->send();
         }
 
-        // if ($mail) {
-        //     $config = array(
-        //         'driver'     => 'smtp',
-        //         'host'       => $mail->host,
-        //         'port'       => $mail->port,
-        //         'from'       => array('address' => $mail->userName, 'name' => $mail->userName),
-        //         'encryption' => $mail->isEnableSSL ? 'ssl' : '',
-        //         'username'   => $mail->userName,
-        //         'password'   => $mail->password,
-        //         'sendmail'   => '/usr/sbin/sendmail -bs',
-        //         'pretend'    => false,
-        //     );
-        //     Config::set(
-        //         'mail',
-        //         $config
-        //     );
+         if ($mail) {
+             $config = array(
+                 'driver'     => 'smtp',
+                 'host'       => $mail->host,
+                 'port'       => $mail->port,
+                 'from'       => array('address' => $mail->userName, 'name' => $mail->userName),
+                 'encryption' => $mail->isEnableSSL ? 'ssl' : '',
+                 'username'   => $mail->userName,
+                 'password'   => $mail->password,
+                 'sendmail'   => '/usr/sbin/sendmail -bs',
+                 'pretend'    => false,
+             );
+             Config::set(
+                 'mail',
+                 $config
+             );
 
-        //     Mail::send([], [], function ($message) use ($attribute, $mail) {
-        //         $message
-        //             ->from($mail->userName)
-        //             ->to($attribute['to_address'])
-        //             ->subject($attribute['subject'])
-        //             ->html($attribute['message']);
+             Mail::send([], [], function ($message) use ($attribute, $mail) {
+                 $message
+                     ->from($mail->userName)
+                     ->to($attribute['to_address'])
+                     ->subject($attribute['subject'])
+                     ->html($attribute['message']);
 
-        //         if ($attribute['path'] != null) {
-        //             $message->attach(
-        //                 $attribute['path'],
-        //                 array(
-        //                     'as' => $attribute['file_name'], // If you want you can chnage original name to custom name
-        //                     'mime' => $attribute['mime_type']
-        //                 )
-        //             );
-        //         }
-        //     });
-        // }
+                 if ($attribute['path'] != null) {
+                     $message->attach(
+                         $attribute['path'],
+                         array(
+                             'as' => $attribute['file_name'],
+                             'mime' => $attribute['mime_type']
+                         )
+                     );
+                 }
+             });
+         }
     }
 }
