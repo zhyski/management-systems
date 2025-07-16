@@ -20,6 +20,26 @@ class RoleSeeder extends Seeder
     {
         DB::table('roles')->delete();
         $user = Users::first();
+        
+        if (!$user) {
+               // Create a default user if none exists
+               $user = Users::create([
+                   'id' => (string) \Illuminate\Support\Str::uuid(), // Generate a UUID
+                   'firstName' => 'zhyrus',
+                   'lastName' => 'tolentino ',
+                   'isDeleted' => false,
+                   'userName' => 'zhyski',
+                   'email' => 'zjmutolentino58@gmail.com',
+                   'password' => bcrypt('123456'), // Use a secure password
+                   'emailConfirmed' => true,
+                   'phoneNumberConfirmed' => true,
+                   'twoFactorEnabled' => false,
+                   'lockoutEnabled' => false,
+                   'accessFailedCount' => 0,
+               ]);
+           }
+
+
 
         $roles =
             [

@@ -123,6 +123,12 @@ class UpdateController extends Controller
             '--class' => \PermissionSeederV23::class,
             '--force' => true,
         ]);
+
+        Artisan::call('db:seed', [
+           '--class' => \RoleSeeder::class,
+           '--force' => true,
+       ]);
+
     }
 
     private function getCurrentVersion(): string
