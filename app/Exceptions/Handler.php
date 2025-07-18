@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         return $request->expectsJson()
-            ? response()->json(['message' => 'Toekn is Expired.'], 401)
+            ? response()->json(['message' => 'Token is Expired.'], 401)
             : redirect()->guest(route('authentication.index'));
     }
 }
